@@ -6,16 +6,13 @@ import { Box } from "@mui/system";
 
 function Signup() {
   let signUp = () => {
-    signUpUser({email, password, userName:'Abdul Basit Ahmed', contact:'313125'})
-      .then((userCredential) => {
+    signUpUser({ email, password, userName: 'Abdul Basit Ahmed', contact: '313125' })
+      .then((success) => {
         // Signed in
-        const user = userCredential.user;
-        console.log(user);
+        console.log(success);
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage);
+        console.log(error);
       });
   };
   // const navigate = useNavigate();
@@ -28,7 +25,7 @@ function Signup() {
         Signup
       </Typography>
 
-      <Box style={{ textAlign: "center"}}>
+      <Box style={{ textAlign: "center" }}>
         <Box mt={5}>
           <TextField
             label="Email"
