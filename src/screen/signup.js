@@ -47,16 +47,6 @@ function Signup() {
           </Button>
         </Box>
       </Box>
-      {/* <Button
-        onClick={() => {
-          navigate("/");
-        }}
-        variant="contained"
-        size="large"
-        sx={{ width: "10%" }}
-      >
-        Back
-      </Button> */}
     </>
   );
 }
