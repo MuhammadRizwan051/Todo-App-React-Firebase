@@ -14,7 +14,7 @@ function Login() {
     loginUser({ email, password })
       .then((success) => {
 
-        navigate('/')
+        navigate('/todos')
         console.log((success))
       })
       .catch((error) => {
