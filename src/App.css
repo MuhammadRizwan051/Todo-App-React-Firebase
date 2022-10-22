@@ -13,8 +13,13 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
+.button{
+  background-image: linear-gradient(to left, #AA44B1, #F3429A);
+}
+.login {
+  /* background-image: linear-gradient(to left #AA44B1, #F3429A); */
+  background-image: linear-gradient(to bottom, #86c4f5, #094675);
+  /* background-color: #282c34; */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -22,17 +27,59 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  text-align: center;
+}
+.signup {
+  /* background-image: linear-gradient(to left #AA44B1, #F3429A); */
+  background-image: linear-gradient(to bottom, #86c4f5, #094675);
+  /* background-color: #282c34; */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  text-align: center;
+}
+.main{
+  background-color: white;
+  border-radius: 10px;
+  color: black;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media screen and (min-width:1250px){
+  .main{
+    width:25%
   }
-  to {
-    transform: rotate(360deg);
+}
+@media screen and (max-width:1249px){
+  .main{
+    width:35%
+  }
+}
+@media screen and (max-width:950px){
+  .main{
+    width:45%
+  }
+}
+@media screen and (max-width:700px){
+  .main{
+    width:50%
+  }
+}
+@media screen and (max-width:600px){
+  .main{
+    width:60%
+  }
+}
+@media screen and (max-width:600px){
+  .main{
+    width:70%
+  }
+}
+@media screen and (max-width:450px){
+  .main{
+    width:90%
   }
 }

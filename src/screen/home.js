@@ -18,7 +18,6 @@ function Home() {
                     </Button>
                 </Box>
             </Box>
-
         </>
     )
 }
