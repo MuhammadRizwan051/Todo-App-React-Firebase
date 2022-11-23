@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Typography } from "@mui/material";
 import Button from "../components/Button.js";
+import SMButton from "../components/SMButton.js";
+import SMInput from "../components/SMInput.js";
 
 
 function Todos() {
@@ -22,6 +24,9 @@ function Todos() {
         setTxt('')
     };
 
+    // let save = () => {
+    //     console.log('Todos Add')
+    // }
 
     // Edit Todos
     let edit = (e, i) => {
@@ -43,14 +48,11 @@ function Todos() {
     return (
         <>
             <Typography variant="h2" align="center" color="error">Todo List</Typography>
-            
+
             <div className="container py-5 px-2" style={{ height: "100%" }}>
                 <div className="row mx-0">
-                    <input value={txt} type="text" placeholder="Enter Todos" className="ps-3 p-1 fs-5 col-xxl-11 col-md-10" onChange={(e) => {
-                        setTxt(e.target.value);
-                    }}
-                    />
-                    <Button click={add} add="btn btn-success col-xxl-1 col-md-2 mt-3 mt-md-0" value="Add Todo" />
+                    <SMInput label='Todo' value={txt} type='text' placeholder="Enter Todos" className="ps-3 p-1 fs-5 col-xxl-11 col-md-10" onChange={(e) => { setTxt(e.target.value) }} />
+                    <SMButton onClick={add} className="btn btn-success col-xxl-1 col-md-2 mt-3 mt-md-0" label="Add Todo" />
                     {list.length === 0 ? <p className="text-danger fs-3 text-center mt-4">No Todos to display</p> :
                         <p className="text-danger fs-3 text-center mt-4">{`Total: ${list.length}`}</p>}
                 </div>
@@ -67,8 +69,14 @@ function Todos() {
                         </li>
                     </ul>
                 ))}
-                {list.length > 0 ? <Button click={deleteAll} deleteAll="btn btn-danger px-3 fs-5 w-100 mt-5" value="Delete All" /> : ""}
-
+                {list.length > 0 ?
+                    (
+                        <>
+                            {/* <Button click={save} value="Save" /> */}
+                            <SMButton onClick={deleteAll} className="btn btn-danger px-3 fs-5 w-50 mt-5" label="Delete All" />
+                        </>
+                    )
+                    : ""}
             </div>
         </>
     )
