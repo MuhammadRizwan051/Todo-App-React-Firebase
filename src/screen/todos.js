@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Typography } from "@mui/material";
 import Button from "../components/Button.js";
 
 
 function Todos() {
     const navigate = useNavigate();
+    // const param = useParams()
 
     let [txt, setTxt] = useState("");
     let [list, setList] = useState([]);
@@ -43,7 +44,6 @@ function Todos() {
         <>
             <Typography variant="h2" align="center" color="error">Todo List</Typography>
             
-
             <div className="container py-5 px-2" style={{ height: "100%" }}>
                 <div className="row mx-0">
                     <input value={txt} type="text" placeholder="Enter Todos" className="ps-3 p-1 fs-5 col-xxl-11 col-md-10" onChange={(e) => {

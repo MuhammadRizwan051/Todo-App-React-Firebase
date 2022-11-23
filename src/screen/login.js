@@ -14,8 +14,7 @@ function Login() {
   let login = () => {
     loginUser({ email, password })
       .then((success) => {
-
-        navigate('/todos')
+        navigate(`/todos/${success.id}`)
         console.log((success))
       })
       .catch((error) => {
@@ -27,8 +26,8 @@ function Login() {
     <>
       <Box className='login'>
         <Box className='main' px={4} py={5}>
-        <h2 variant="h1" align="center" color="error">Login
-        </h2>
+          <h2 variant="h1" align="center" color="error">Login
+          </h2>
           <Box mt={3} fullWidth>
             <Button className='button' variant="contained" size="large" sx={{ width: '50%' }} onClick={() => navigate('/login')}>
               Login
@@ -60,7 +59,7 @@ function Login() {
             </Button>
           </Box>
           <Box>
-            <Typography sx={{fontWeight:'bold'}}>Create new account <Link to="/signup" style={{textDecoration:'none'}}>SIGN UP</Link></Typography> 
+            <Typography sx={{ fontWeight: 'bold' }}>Create new account <Link to="/signup" style={{ textDecoration: 'none' }}>SIGN UP</Link></Typography>
           </Box>
         </Box>
       </Box>
