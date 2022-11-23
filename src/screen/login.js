@@ -25,35 +25,6 @@ function Login() {
 
   return (
     <>
-      {/* <Typography variant="h2" align="center" color="error">Log In
-      </Typography> */}
-      {/* <Box style={{ textAlign: "center" }}>
-        <Box mt={5}>
-          <TextField
-            label="Email"
-            variant="standard"
-            onChange={(e) => setEmail(e.target.value)}
-            sx={{ width: '50%', padding: '5px 0px' }}
-          />
-        </Box>
-        <Box mt={5}>
-          <TextField
-            label="Password"
-            variant="standard"
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            sx={{ width: '50%', padding: '5px 0px' }}
-          />
-        </Box>
-        <Box mt={5}>
-          <Button variant="contained" size="large" onClick={login}>
-            Login
-          </Button>
-        </Box>
-      </Box> */}
-
-
-
       <Box className='login'>
         <Box className='main' px={4} py={5}>
         <h2 variant="h1" align="center" color="error">Login
