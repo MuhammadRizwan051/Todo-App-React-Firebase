@@ -12,7 +12,7 @@ function Signup() {
   const navigate = useNavigate()
 
   let signUp = () => {
-    signUpUser({ email, password, userName: 'Abdul Basit Ahmed', contact: '313125' })
+    signUpUser({ email, password })
       .then((success) => {
         // Signed in
         console.log(success);
