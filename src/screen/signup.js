@@ -5,19 +5,25 @@ import { signUpUser } from "../config/firebasemethod";
 import { Box } from "@mui/system";
 import { Link, useNavigate } from "react-router-dom";
 import '../App.css';
-
+import CircularProgress from "@mui/material/CircularProgress";
 
 
 function Signup() {
   const navigate = useNavigate()
+  const [isLoading, setIsLoading] = useState(false)
+
 
   let signUp = () => {
+    setIsLoading(true)
     signUpUser({ email, password })
       .then((success) => {
+        setIsLoading(false)
         // Signed in
         console.log(success);
+        navigate('/')
       })
       .catch((error) => {
+        setIsLoading(false)
         console.log(error);
       });
   };
@@ -27,43 +33,12 @@ function Signup() {
 
   return (
     <>
-      {/* <Typography variant="h2" align="center" color="error">
-        Signup
-      </Typography>
-
-      <Box style={{ textAlign: "center" }}>
-        <Box mt={5}>
-          <TextField
-            label="Email"
-            variant="standard"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Box>
-        <Box mt={5}>
-          <TextField
-            label="Password"
-            variant="standard"
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Box>
-        <Box mt={5}>
-          <Button variant="contained" size="large" onClick={signUp}>
-            Sign Up
-          </Button>
-        </Box>
-      </Box> */}
-
-
-
-
-
       <Box className='signup'>
         <Box className='main' px={4} py={5}>
           <h2 variant="h1" align="center" color="error">Signup
           </h2>
           <Box mt={3} fullWidth>
-            <Button variant="outlined" size="large" sx={{ width: '50%', fontWeight: 'bold', color: 'black' }} onClick={() => navigate('/login')}>
+            <Button variant="outlined" size="large" sx={{ width: '50%', fontWeight: 'bold', color: 'black' }} onClick={() => navigate('/')}>
               Login
             </Button>
             <Button className='button' variant="contained" size="large" sx={{ width: '50%' }} onClick={() => navigate('/signup')}>
@@ -89,7 +64,7 @@ function Signup() {
           </Box>
           <Box my={2}>
             <Button className='button' variant="contained" size="large" fullWidth onClick={signUp}>
-              SIGNUP
+              {isLoading ? <CircularProgress color='inherit' /> : "SIGN UP"}
             </Button>
           </Box>
           <Box>

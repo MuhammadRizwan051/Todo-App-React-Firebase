@@ -3,24 +3,31 @@ import { Typography, Button, TextField, Box } from "@mui/material";
 import { loginUser } from "../config/firebasemethod";
 import { Link, useNavigate } from "react-router-dom";
 import '../App.css';
+import CircularProgress from "@mui/material/CircularProgress";
 
 
 function Login() {
 
+  const [isLoading, setIsLoading] = useState(false)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate()
 
   let login = () => {
+    setIsLoading(true)
     loginUser({ email, password })
       .then((success) => {
+        setIsLoading(false)
         navigate(`/todos/${success.id}`)
         console.log((success))
       })
       .catch((error) => {
+        setIsLoading(false)
         console.log(error)
       })
   };
+
+  console.log(isLoading)
 
   return (
     <>
@@ -55,7 +62,7 @@ function Login() {
           </Box>
           <Box my={2}>
             <Button className='button' variant="contained" size="large" fullWidth onClick={login}>
-              Login
+              {isLoading ? <CircularProgress color='inherit' /> : "Login"}
             </Button>
           </Box>
           <Box>
