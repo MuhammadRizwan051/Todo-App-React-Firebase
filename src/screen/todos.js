@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Box, Grid, Typography } from "@mui/material";
 import Button from "../components/Button.js";
 import SMButton from "../components/SMButton.js";
 import SMInput from "../components/SMInput.js";
 import { Container } from "@mui/system";
-import { getData, sendData } from "../config/firebasemethod.js";
+import { checkUser, getData, logoutUser, sendData } from "../config/firebasemethod.js";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 
 function Todos() {
@@ -13,11 +14,13 @@ function Todos() {
     const param = useParams()
     console.log(param.id)
 
+
     let [txt, setTxt] = useState("");
     let [list, setList] = useState([]);
 
     let [data, setData] = useState()
     let [isLoading, setIsLoading] = useState(false)
+
 
     // Add Todos
     let add = () => {
@@ -78,19 +81,49 @@ function Todos() {
     let deleteFunc = (todoValueGet, todoIndex) => {
         setList(list.filter((e, i) => { return i !== todoIndex }))
     };
+
+
+    let checkAuth = () => {
+        checkUser()
+            .then(() => {
+                console.log('User Login')
+            })
+            .catch((err) => {
+                console.log('User Log out')
+                navigate("/");
+            });
+    };
+
+    useEffect(() => {
+        checkAuth();
+    }, []);
+
+
+    const logout = () => {
+        logoutUser().then(() => {
+            navigate('/')
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
+
+
     return (
         <>
             <Typography variant="h2" align="center" color="error">Todo List</Typography>
+            <Grid item md={12} mb={3} mt={5} >
+                <SMButton onClick={logout} color='secondary' fullWidth label="Log out" />
+            </Grid>
 
             <Container className="container py-5 px-2" >
                 <Grid container columnSpacing='8'>
                     <Grid item md={10} sm={9}>
                         <SMInput label='Enter Todos' value={txt} type='text' placeholder="Enter Todos" onChange={(e) => { setTxt(e.target.value) }} />
                     </Grid>
-                    <Grid item md={2} sm={3} sx={{ display: 'flex', }}>
+                    <Grid item md={2} sm={3} sx={{ display: 'flex' }}>
                         <SMButton onClick={add} color='success' fullWidth label="Add Todo" />
                     </Grid>
-                    <Grid item md={12} mb={3}>
+                    <Grid item md={12} mb={3} mt={5} >
                         <SMButton onClick={allTodos} color='secondary' fullWidth label="All Todos" />
                     </Grid>
                     <Grid item md={12} sm={12}>
