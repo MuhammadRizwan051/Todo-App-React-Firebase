@@ -4,6 +4,8 @@ import { loginUser } from "../config/firebasemethod";
 import { Link, useNavigate } from "react-router-dom";
 import '../App.css';
 import CircularProgress from "@mui/material/CircularProgress";
+import { useDispatch } from "react-redux";
+import {edit} from '../redux/loginReducer'
 
 
 function Login() {
@@ -12,14 +14,20 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const [model, setModel] = useState({})
 
   let login = () => {
     setIsLoading(true)
     loginUser({ email, password })
       .then((success) => {
+        setModel(success)
         setIsLoading(false)
-        navigate(`/todos/${success.id}`)
+        navigate(`/todos/${success.id}`, {state:success})
         console.log((success))
+        
+        dispatch(edit({userEmail: email }))  // send data of object to redux using dispatch and dispatch is use for update data only
       })
       .catch((error) => {
         setIsLoading(false)
