@@ -15,21 +15,11 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import { checkUser, logoutUser } from '../config/firebasemethod';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSelector } from "react-redux";
+
 
 const drawerWidth = 240;
-const navItems = [
-    {
-        name: 'Login',
-        url: 'login'
-    },
-    // {
-    //     name: 'Sign up',
-    //     url: 'signup'
-    // }
-];
-
 
 function DrawerAppBar(props) {
     const { user } = props
@@ -42,6 +32,14 @@ function DrawerAppBar(props) {
         setMobileOpen(!mobileOpen);
     };
 
+    const logout = () => {
+        logoutUser().then(() => {
+            navigate('/login')
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
+
     let checkAuth = () => {
         checkUser()
             .then(() => {
@@ -49,7 +47,7 @@ function DrawerAppBar(props) {
             })
             .catch((err) => {
                 console.log('User Log out')
-                navigate("/");
+                navigate("/login");
             });
     };
 
@@ -57,28 +55,13 @@ function DrawerAppBar(props) {
         checkAuth();
     }, []);
 
-
-    const logout = () => {
-        logoutUser().then(() => {
-            navigate('/')
-        }).catch((err) => {
-            console.log(err)
-        })
-    }
-
-    // let [showTodos, setShowTodos] = useState(false)
-    // const home = () => {
-    //     setShowTodos(true)
-    // }
-
-
     const drawer = (
         <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
             <Typography variant="h6" sx={{ my: 2, fontFamily: 'cursive' }}>
                 {user}
             </Typography>
             <Divider />
-            <List>
+            {/* <List>
                 {navItems.map((item) => (
                     <ListItem key={item} disablePadding onClick={() => navigate(`/${item.url}`)}>
                         <ListItemButton sx={{ textAlign: 'center' }}>
@@ -86,11 +69,14 @@ function DrawerAppBar(props) {
                         </ListItemButton>
                     </ListItem>
                 ))}
-            </List>
+            </List> */}
         </Box>
     );
 
     const container = window !== undefined ? () => window().document.body : undefined;
+
+    const loginDataFromReducer = useSelector(a => a.loginReducer)  // we receive whole reducer here in parameter 'a' which we send from store.js
+    console.log(loginDataFromReducer)  // Object receive  loginSlice(initialState) data
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -113,7 +99,8 @@ function DrawerAppBar(props) {
                         {user}
                     </Typography>
                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-                        <Button sx={{ color: '#fff', fontSize: '18px', ml: 2, fontWeight: 'bold', fontFamily: 'arial' }} onClick={() => navigate('/home', {state: user})}>Home</Button>
+                        <Button sx={{ color: '#fff', fontSize: '18px', ml: 2, fontWeight: 'bold', fontFamily: 'arial' }} onClick={() => navigate('/')}>Home</Button>
+                        <Button sx={{ color: '#fff', fontSize: '18px', ml: 2, fontWeight: 'bold', fontFamily: 'arial' }} onClick={() => navigate('/todos')}>Todos</Button>
                         <Button sx={{ color: '#fff', fontSize: '18px', ml: 2, fontWeight: 'bold', fontFamily: 'arial' }} onClick={logout}>Logout</Button>
                     </Box>
                 </Toolbar>

@@ -10,7 +10,7 @@ const loginSlice = createSlice({
     reducers: {
         add(state, action) { },
         edit(state, action) {
-            console.log(action)
+            console.log(action.payload)
             state.email = action.payload.email
             state.password = action.payload.password
         },

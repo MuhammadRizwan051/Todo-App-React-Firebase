@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import '../App.css';
 import CircularProgress from "@mui/material/CircularProgress";
 import { useDispatch } from "react-redux";
-import {edit} from '../redux/loginReducer'
+import { edit } from '../redux/loginReducer'
 
 
 function Login() {
@@ -16,18 +16,16 @@ function Login() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const [model, setModel] = useState({})
 
   let login = () => {
     setIsLoading(true)
     loginUser({ email, password })
       .then((success) => {
-        setModel(success)
         setIsLoading(false)
-        navigate(`/todos/${success.id}`, {state:success})
-        console.log((success))
-        
-        dispatch(edit({userEmail: email }))  // send data of object to redux using dispatch and dispatch is use for update data only
+        // navigate(`/${success.id}`, { state: success })
+        navigate(`/`)
+        console.log(success)
+        dispatch(edit(success))  // send data of object to redux using dispatch and dispatch is use for update data only
       })
       .catch((error) => {
         setIsLoading(false)

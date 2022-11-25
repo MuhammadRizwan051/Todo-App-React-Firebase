@@ -12,9 +12,6 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function Todos() {
     const navigate = useNavigate();
-    const param = useParams()
-    console.log(param)
-
 
     let [txt, setTxt] = useState("");
     let [list, setList] = useState([]);
@@ -34,7 +31,7 @@ function Todos() {
 
     let save = () => {
         console.log('Todos Add')
-        sendData(list, `todos/`, param.id)
+        sendData(list, `todos/`)
             .then((success => {
                 // setLoader(false)
                 navigate('/userForm')
@@ -93,12 +90,10 @@ function Todos() {
     //     })
     // }
 
-    const location = useLocation()
-    console.log(location.state)
 
     return (
         <>
-            <SMNavbar user={location.state.email} />
+            <SMNavbar />
             <Typography variant="h2" align="center" color="error">Todo List</Typography>
 
 

@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Box, Button, Grid } from '@mui/material'
 import SMNavbar from '../components/SMNavbar'
 import SMButton from '../components/SMButton'
-import { getData } from '../config/firebasemethod'
+import { checkUser, getData } from '../config/firebasemethod'
 import { useSelector } from "react-redux";
 
 function Home() {
@@ -12,7 +12,20 @@ function Home() {
     const [isLoading, setIsLoading] = useState(false)
     const [data, setData] = useState()
 
+    let checkAuth = () => {
+        checkUser()
+            .then(() => {
+                console.log('User Login')
+            })
+            .catch((err) => {
+                console.log('User Log out')
+                navigate("/login");
+            });
+    };
 
+    useEffect(() => {
+        checkAuth();
+    }, []);
 
     let allTodos = () => {
         setIsLoading(true)
@@ -28,13 +41,12 @@ function Home() {
             })
     }
 
-    const loginDataFromReducer = useSelector(a => a.loginReducer)  // we receive whole reducer here in parameter 'a' which we send from store.js
-    console.log(loginDataFromReducer)  // Object receive  loginSlice(initialState) data
-
+    // const loginDataFromReducer = useSelector(a => a.loginReducer)  // we receive whole reducer here in parameter 'a' which we send from store.js
+    // console.log(loginDataFromReducer)  // Object receive  loginSlice(initialState) data
 
     return (
         <>
-            <SMNavbar user={location.state} />
+            <SMNavbar />
 
             <Grid container>
                 <Grid item md={2} mb={3} mt={5} >
