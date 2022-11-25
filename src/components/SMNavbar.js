@@ -17,7 +17,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { checkUser, logoutUser } from '../config/firebasemethod';
 import { useEffect, useState } from 'react';
 import { useSelector } from "react-redux";
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 const drawerWidth = 240;
@@ -103,23 +103,24 @@ function DrawerAppBar(props) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, fontFamily: 'cursive', fontSize: '28px' }}
-                    >
-                        {user}
-                    </Typography>
-                    <Box sx={{ display: { xs: 'none', sm: 'block', width:'100%', fontSize:'22px' } }}>
+                    <Box sx={{ display: { xs: 'none', sm: 'block', fontSize: '22px' } }}>
                         {/* <Button sx={{ color: '#fff', fontSize: '18px', ml: 2, fontWeight: 'bold', fontFamily: 'arial' }} onClick={() => navigate('/')}>Home</Button>
                         <Button sx={{ color: '#fff', fontSize: '18px', ml: 2, fontWeight: 'bold', fontFamily: 'arial' }} onClick={() => navigate('/todos')}>Todos</Button>
                         <Button sx={{ color: '#fff', fontSize: '18px', ml: 2, fontWeight: 'bold', fontFamily: 'arial' }} onClick={logout}>Logout</Button> */}
                         {/* {navItems.map((e, i) => (
                             <NavLink className='links' to={e.url} style={{color:'white', textDecoration: 'none', fontWeight:'bold'}}>{e.name}</NavLink>
                         ))} */}
-                        <NavLink to='/' end style={{color:'white', textDecoration: 'none', fontWeight:'bold'}} className='me-5' px={5}>Home</NavLink>
-                        <NavLink to='/todos' style={{color:'white', textDecoration: 'none', fontWeight:'bold'}} className='me-5' px={5}>Todos</NavLink>
+                        <NavLink to='/' end style={{ color: 'white', textDecoration: 'none', fontWeight: 'bold' }} className='me-5' px={5}>Home</NavLink>
+                        <NavLink to='/todos' style={{ color: 'white', textDecoration: 'none', fontWeight: 'bold' }} className='me-5' px={5}>Todos</NavLink>
+                        <NavLink to='/login' onClick={logout} style={{ color: 'white', textDecoration: 'none', fontWeight: 'bold' }} className='me-5' px={5}>Logout</NavLink>
                     </Box>
+                    <Typography
+                        variant="h6"
+                        component="div"
+                        sx={{ flexGrow: 1, display: { xs: 'none', sm: 'flex' }, justifyContent: 'flex-end', fontFamily: 'cursive', fontSize: '28px', width: '100%' }}
+                    >
+                        {loginDataFromReducer.email}
+                    </Typography>
                 </Toolbar>
             </AppBar>
             <Box component="nav">
