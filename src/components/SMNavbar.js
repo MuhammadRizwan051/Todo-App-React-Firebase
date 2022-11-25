@@ -13,10 +13,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { checkUser, logoutUser } from '../config/firebasemethod';
 import { useEffect, useState } from 'react';
 import { useSelector } from "react-redux";
+import {Link} from 'react-router-dom'
 
 
 const drawerWidth = 240;
@@ -55,21 +56,32 @@ function DrawerAppBar(props) {
         checkAuth();
     }, []);
 
+    let navItems = [
+        {
+            name: 'Home',
+            url: '/'
+        },
+        {
+            name: 'Todos',
+            url: '/todos'
+        },
+    ]
+
     const drawer = (
         <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
             <Typography variant="h6" sx={{ my: 2, fontFamily: 'cursive' }}>
                 {user}
             </Typography>
             <Divider />
-            {/* <List>
-                {navItems.map((item) => (
-                    <ListItem key={item} disablePadding onClick={() => navigate(`/${item.url}`)}>
+            <List>
+                {navItems.map((item, index) => (
+                    <ListItem key={index} disablePadding onClick={() => navigate(`/${item.url}`)}>
                         <ListItemButton sx={{ textAlign: 'center' }}>
                             <ListItemText primary={item.name} />
                         </ListItemButton>
                     </ListItem>
                 ))}
-            </List> */}
+            </List>
         </Box>
     );
 
@@ -98,10 +110,15 @@ function DrawerAppBar(props) {
                     >
                         {user}
                     </Typography>
-                    <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-                        <Button sx={{ color: '#fff', fontSize: '18px', ml: 2, fontWeight: 'bold', fontFamily: 'arial' }} onClick={() => navigate('/')}>Home</Button>
+                    <Box sx={{ display: { xs: 'none', sm: 'block', width:'100%', fontSize:'22px' } }}>
+                        {/* <Button sx={{ color: '#fff', fontSize: '18px', ml: 2, fontWeight: 'bold', fontFamily: 'arial' }} onClick={() => navigate('/')}>Home</Button>
                         <Button sx={{ color: '#fff', fontSize: '18px', ml: 2, fontWeight: 'bold', fontFamily: 'arial' }} onClick={() => navigate('/todos')}>Todos</Button>
-                        <Button sx={{ color: '#fff', fontSize: '18px', ml: 2, fontWeight: 'bold', fontFamily: 'arial' }} onClick={logout}>Logout</Button>
+                        <Button sx={{ color: '#fff', fontSize: '18px', ml: 2, fontWeight: 'bold', fontFamily: 'arial' }} onClick={logout}>Logout</Button> */}
+                        {/* {navItems.map((e, i) => (
+                            <NavLink className='links' to={e.url} style={{color:'white', textDecoration: 'none', fontWeight:'bold'}}>{e.name}</NavLink>
+                        ))} */}
+                        <NavLink to='/' end style={{color:'white', textDecoration: 'none', fontWeight:'bold'}} className='me-5' px={5}>Home</NavLink>
+                        <NavLink to='/todos' style={{color:'white', textDecoration: 'none', fontWeight:'bold'}} className='me-5' px={5}>Todos</NavLink>
                     </Box>
                 </Toolbar>
             </AppBar>
